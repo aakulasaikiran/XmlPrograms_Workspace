@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/com/bookwebserviceprovider/domain/Book.java=UTF-8
+encoding//src/com/bookwebserviceprovider/service/BookServiceImpl.java=UTF-8
+encoding//src/com/bookwebserviceprovider/service/BookServiceImplService.java=UTF-8
+encoding//src/com/bookwebserviceprovider/service/BookServiceImplServiceLocator.java=UTF-8
+encoding//src/com/bookwebserviceprovider/service/BookServiceImplSoapBindingStub.java=UTF-8

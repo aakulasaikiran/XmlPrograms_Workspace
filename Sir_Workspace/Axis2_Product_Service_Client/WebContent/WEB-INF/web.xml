@@ -1,0 +1,15 @@
+<web-app>
+<servlet>
+<servlet-name>productServlet</servlet-name>
+<servlet-class>com.axis2clientexample.controller.ProductServlet</servlet-class>
+<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>productServlet</servlet-name>
+<url-pattern>/registerProduct</url-pattern>
+</servlet-mapping>
+<welcome-file-list>
+<welcome-file>/WEB-INF/pages/productRegForm.jsp
+</welcome-file>
+</welcome-file-list>
+</web-app>

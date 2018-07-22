@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://service.contractlastexample.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://bo.contractlastexample.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://service.contractlastexample.com">
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://bo.contractlastexample.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.contractlastexample.com">
+            <xs:import namespace="http://bo.contractlastexample.com/xsd"/>
+            <xs:element name="registerProduct">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="productBO" nillable="true" type="ax21:ProductBO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="registerProductResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bo.contractlastexample.com/xsd">
+            <xs:complexType name="ProductBO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="price" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="productId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="productName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="registerProductRequest">
+        <wsdl:part name="parameters" element="ns:registerProduct"/>
+    </wsdl:message>
+    <wsdl:message name="registerProductResponse">
+        <wsdl:part name="parameters" element="ns:registerProductResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ProductServiceImplPortType">
+        <wsdl:operation name="registerProduct">
+            <wsdl:input message="ns:registerProductRequest" wsaw:Action="urn:registerProduct"/>
+            <wsdl:output message="ns:registerProductResponse" wsaw:Action="urn:registerProductResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ProductServiceImplSoap11Binding" type="ns:ProductServiceImplPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="registerProduct">
+            <soap:operation soapAction="urn:registerProduct" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ProductServiceImplSoap12Binding" type="ns:ProductServiceImplPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="registerProduct">
+            <soap12:operation soapAction="urn:registerProduct" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="ProductServiceImplHttpBinding" type="ns:ProductServiceImplPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="registerProduct">
+            <http:operation location="registerProduct"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ProductServiceImpl">
+        <wsdl:port name="ProductServiceImplHttpSoap11Endpoint" binding="ns:ProductServiceImplSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/ProductServiceImpl"/>
+        </wsdl:port>
+        <wsdl:port name="ProductServiceImplHttpSoap12Endpoint" binding="ns:ProductServiceImplSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/ProductServiceImpl"/>
+        </wsdl:port>
+        <wsdl:port name="ProductServiceImplHttpEndpoint" binding="ns:ProductServiceImplHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/ProductServiceImpl"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:web="http://xmlns.jcp.org/xml/ns/javaee">
+  <servlet>
+    <servlet-name>jerseyservlet</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jerseyservlet</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Products</web-resource-name>
+      <url-pattern>/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>ADMIN1</role-name>
+    </auth-constraint>
+  </security-constraint>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+  </login-config>
+  <security-role>
+    <role-name>ADMIN1</role-name>
+  </security-role>
+</web-app>

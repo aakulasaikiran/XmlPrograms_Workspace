@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.axis2example.com" xmlns:impl="http://service.axis2example.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:intf="http://service.axis2example.com">
+  <wsdl:types>
+    <schema elementFormDefault="qualified" targetNamespace="http://service.axis2example.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="name" type="xsd:string"/>
+   <element name="sayHelloReturn" type="xsd:string"/>
+  </schema>
+  </wsdl:types>
+  <wsdl:message name="sayHelloResponse">
+    <wsdl:part name="sayHelloReturn" element="impl:sayHelloReturn">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sayHelloRequest">
+    <wsdl:part name="name" element="impl:name">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IHelloService">
+    <wsdl:operation name="sayHello" parameterOrder="name">
+      <wsdl:input name="sayHelloRequest" message="impl:sayHelloRequest">
+    </wsdl:input>
+      <wsdl:output name="sayHelloResponse" message="impl:sayHelloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HelloServiceImplSoapBinding" type="impl:IHelloService">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sayHello">
+      <wsdlsoap:operation soapAction=""/>
+      <wsdl:input name="sayHelloRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sayHelloResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HelloService">
+    <wsdl:port name="IHelloService" binding="impl:HelloServiceImplSoapBinding">
+      <wsdlsoap:address location="http://localhost:8082/Axis2_Contract_First_Example/hello"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

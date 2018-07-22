@@ -1,0 +1,28 @@
+<web-app>
+<listener>
+<listener-class>
+org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+<!-- The listener will create spring container
+by default it searches spring cfg file 
+in WEB-INF folder with applcationContext.xml
+ -->
+<servlet>
+<servlet-name>jersey-serlvet</servlet-name>
+<servlet-class>
+com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
+<init-param>
+<param-name>com.sun.jersey.config.property.packages</param-name>
+<param-value>com.jerseyexample.service</param-value>
+</init-param>
+<!-- With this init-param container searches
+root-resource classes in the sepcified package
+ -->
+<load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+<servlet-name>jersey-serlvet</servlet-name>
+<url-pattern>/*</url-pattern>
+</servlet-mapping>
+</web-app>
+
